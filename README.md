@@ -62,6 +62,10 @@ I've included a simple flask app that will request and receive a translated JSON
 7) Wait a few moments for the translation package to run, then the data will be displayed in the browser.
 - ![chrome_irHrqyGVDf](https://github.com/user-attachments/assets/667b644a-1e50-4d9c-93c7-0253109eadc3)
 
+# UML Diagram
+![chrome_KB86stPu8o](https://github.com/user-attachments/assets/022febcd-18d1-4ae5-a087-e1f95d290875)
+
+
 
 
 
