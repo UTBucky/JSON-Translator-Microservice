@@ -1,6 +1,13 @@
 # JSON-Translator-Microservice
 CS361 - Microservice that translates the values in a JSON file to another language
 
+# JSON Format
+- The JSON file to be translated must be in the following format and contain a key "to_language" with a ISO 639 language code value (https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes)
+- There is no limit to how many numbered keys may be used
+- ![pycharm64_veOMl1daB4](https://github.com/user-attachments/assets/5f5e45ec-e78f-4f75-b0e2-934fe86f9708)
+
+
+
 # Set Up
 1) Download:
 microserviceA.py
@@ -31,15 +38,21 @@ microserviceA.py
 - ![pycharm64_3RVjTidLJ1](https://github.com/user-attachments/assets/c672a6d0-fa84-4b22-a1a5-c144190461ef)
 
 # Call microservice
-1) Run your flask app
+1) Run your flask app after adding the GET function above
 2) Run the microservice
 3) In a browser enter 'https://your_url.com/translate_json' or whatever path name you decided on in the route function
 4) You may need to wait a few seconds for the JSON object to be returned. The translation package is somewhat slow.
 
+# Example Call
+![pycharm64_AfVpjs4p42](https://github.com/user-attachments/assets/8ea20a5a-6e42-42a6-882d-0bfc22cd53bc)
+
+![pycharm64_4hkWtm7ApK](https://github.com/user-attachments/assets/05aeecfe-d2d1-4089-a631-d9953e525f5f)
+
+
 # Running the flask test app program
 I've included a simple flask app that will request and receive a translated JSON file
-1) Download microserviceA.py, flask_test_app.py, and your_file_name.json
-2) your_file_name.json must be in the same directory as flask_test_app.py
+1) Download **microserviceA.py**, **flask_test_app.py**, and **your_file_name.json**
+2) your_file_name.json **must be in the same directory as** flask_test_app.py
 3) Download the required packages if needed:
 - microserviceA.py: flask and translate
 - flask_test_app.py: flask, json, and requests
@@ -47,6 +60,8 @@ I've included a simple flask app that will request and receive a translated JSON
 5) Run microserviceA.py
 6) In your browser enter 'http://127.0.0.1:5000/translate_json'
 7) Wait a few moments for the translation package to run, then the data will be displayed in the browser.
+- ![chrome_irHrqyGVDf](https://github.com/user-attachments/assets/667b644a-1e50-4d9c-93c7-0253109eadc3)
+
 
 
 
