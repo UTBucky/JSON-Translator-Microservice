@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, send_file
+from flask import Flask, jsonify
 import json
 import requests
 
@@ -8,27 +8,27 @@ app.json.ensure_ascii = False    # REQUIRED
 
 # GET route to send JSON file to microservice then receive translated JSON object
 @app.route('/translate_json', methods=['GET'])
-def send_json_to_microservice():
+def translate_json():
     try:
-
-        # Set JSON file that you want translated
-        # Requires a "to_language" key with ISO 639 language code value (eg. "to_language": "es" for Spanish)
+        # Set JSON file to be translated
         with open('your_file_name.json', 'r') as file:
             json_data = json.load(file)
 
-        # Set your URL with port 5001 and a path to /process_json to access microservice
-        response = requests.post('http://127.0.0.1:5001/process_json', json=json_data)
+        # Send request to translation microservice with JSON data
+        # Set your URL with path to /process_json
+        response = requests.post('http://your_url:5001/process_json', json=json_data)
         response.raise_for_status()
 
-        # Get translated JSON from microservice
+        # Get response from microservice with translated JSON
         updated_json = response.json()
 
-        # Set the file to write the translated JSON to (ensure_ascii must be set to False for special characters)
-        with open('updated_data.json', 'w') as file:
-            json.dump(updated_json, file, ensure_ascii=False)
+        # Save the translated JSON data to a file
+        # Set the file name for where you want the translated data written to
+        with open('translated_data.json', 'w') as file:
+            json.dump(updated_json, file, ensure_ascii=False)  # ensure_ascii required to be set to False
 
-        # Uncomment below to view JSON in browser for testing
-        # return jsonify(updated_json)
+        # Returns json data to be displayed in browser
+        return jsonify(updated_json)
 
     except FileNotFoundError:
         return jsonify({"error": "File not found"}), 404
