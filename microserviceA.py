@@ -13,20 +13,25 @@ def process_json():
 
     # Pulls ISO 639 code from "to_language" key to set translation language
     language = json_data["to_language"]
+    if not language:
+            return jsonify({"error": "Language code is missing"}), 400
 
     # Set translation language
     translator = Translator(language)
 
-    # Loop through loaded JSON data, retrieve title and task values, translate then replaces values
-    for i in range(1, len(json_data)):
-        index = str(i)
-        title_translation = translator.translate(json_data[index]['title'])
-        desc_translation = translator.translate(json_data[index]['description'])
-        json_data[index]['title'] = title_translation
-        json_data[index]['description'] = desc_translation
+    # Loop through loaded JSON data, retrieve title and task values, translate then replace values
+    tasks = json_data.get("tasks", {})
+    for index, task in tasks.items():
+        try:
+            title_translation = translator.translate(task['title'])
+            desc_translation = translator.translate(task['description'])
+            task['title'] = title_translation
+            task['description'] = desc_translation
+        except Exception as e:
+            print(f"Translation error for task ID {index}: {e}")
 
     # Return modified JSON data
-    return jsonify(json_data)
+    return jsonify({"to_language": language, "tasks": tasks})
 
 if __name__ == '__main__':
     app.run(port=5001, debug=True)
